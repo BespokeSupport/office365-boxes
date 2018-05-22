@@ -1,5 +1,5 @@
 {
-  "name": "bespoke-support/office365-boxes",
+  "name": "bespoke-support/office365-mail-imap",
   "description": "Read Office365 MailBoxes via PHP IMAP",
   "minimum-stability": "stable",
   "license": "MIT",
