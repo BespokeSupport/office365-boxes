@@ -1,0 +1,28 @@
+{
+  "name": "bespoke-support/office365-boxes",
+  "description": "Read Office365 MailBoxes via PHP IMAP",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Richard Seymour",
+      "email": "web@bespoke.support"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "BespokeSupport\\Office365MailImap\\": "src/"
+    }
+  },
+  "require": {
+    "php":"^7",
+    "php-imap/php-imap": "3.0.*",
+    "bespoke-support/document-storage": "@dev"
+  },
+  "require-dev": {
+    "symfony/phpunit-bridge": "@stable"
+  },
+  "scripts":{
+    "post-autoload-dump": ["BespokeSupport\\Mime\\FileMimesGenerator::composerGenerate"]
+  }
+}
