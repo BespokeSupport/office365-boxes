@@ -1,1 +1,1 @@
-# office365-boxes
+# Read Office365 Mailboxes via PHP IMAP
