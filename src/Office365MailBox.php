@@ -14,7 +14,7 @@ class Office365MailBox extends Mailbox
      * @throws \PhpImap\Exception
      * @throws Office365MailImapException
      */
-    public function __construct(string $user, string $pass, string $sharedUser = null)
+    public function __construct(string $user, string $pass, string $sharedUser = null, string $inbox = 'INBOX')
     {
         if (!$user || !$pass) {
             throw new Office365MailImapException('User / Pass invalid');
@@ -26,12 +26,22 @@ class Office365MailBox extends Mailbox
 
         $userStr = $user . (($sharedUser) ? '\\' . $sharedUser : '');
 
-        parent::__construct('{outlook.office365.com:993/imap/ssl}INBOX', $userStr, $pass);
+        parent::__construct(
+            '{outlook.office365.com:993/imap/ssl/novalidate-cert}' . $inbox,
+            $userStr,
+            $pass,
+            null,
+            'US-ASCII'
+        );
+
+        $this->setConnectionArgs(0, 0, [
+            'DISABLE_AUTHENTICATOR' => 'PLAIN'
+        ]);
     }
 
     /**
      * @param string $attachmentsDir
-     * @throws \Exception
+     * @throws Office365MailImapException
      */
     public function setAttachmentsDir($attachmentsDir)
     {
@@ -42,7 +52,7 @@ class Office365MailBox extends Mailbox
         if (!is_dir($attachmentsDir)) {
             throw new Office365MailImapException('Directory "' . $attachmentsDir . '" not found');
         }
+
         $this->attachmentsDir = rtrim(realpath($attachmentsDir), '\\/');
     }
-
 }

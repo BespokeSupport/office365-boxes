@@ -51,9 +51,9 @@ class Office365MailImap
      * @param string $search
      * @return array
      */
-    public function searchUnseen(string $search)
+    public function searchUnseen()
     {
-        return $this->box->searchMailbox("UNSEEN $search");
+        return $this->box->searchMailbox("UNSEEN");
     }
 
     /**
